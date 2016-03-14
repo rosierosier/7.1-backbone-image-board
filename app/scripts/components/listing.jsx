@@ -3,26 +3,44 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 require('backbone-react-component');
 
+var models = require('../models/image')
+
+
 console.log('Hello Listing');
 
-var Image = React.createClass({
+
+var ImageItself = React.createClass({
   render: function(){
     return (
-      <div>
-        <img
-          src="http://www.thegoldenantlers.com/wp-content/uploads/2015/03/SEA-pic.jpg" />
-      </div>
+      <li>
+        <img />
+        <ImageCaption />
+      </li>
   );
 }
 });
 
-ReactDOM.render(
-  <Image url="http://www.thegoldenantlers.com/wp-content/uploads/2015/03/SEA-pic.jpg" />,
-  document.getElementById('app')
-  );
+var ImageListing = React.createClass({
+  render: function(){
+    mixins: [Backbone.React.Component.mixin]
+    var imageList = this.getCollection().map(function(image){
+      return
+        <ImageItself model={image} />
+    });
+    return (
+      <ul>
+        {imageList}
+      </ul>
+    )
+  }
+});
 
 var ImageCaption = React.createClass({
   render: function(){
-    return (<div>(this.props.category)</div>);
+    mixins: [Backbone.React.Component.mixin]
+    return (<p>{this.getModel().get('caption')}</p>);
   }
 });
+
+
+module.exports = ImageItself;
