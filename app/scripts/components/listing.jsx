@@ -3,44 +3,50 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 require('backbone-react-component');
 
-var models = require('../models/image')
-
+var models = require('../models/image');
+var FormComponent = require('./form.jsx');
 
 console.log('Hello Listing');
 
-
 var ImageItself = React.createClass({
+  mixins: [Backbone.React.Component.mixin],
   render: function(){
+    // console.log(this.props.model.get('image'));
+    // console.log(this.props.model.get('caption'));
     return (
-      <li>
-        <img />
-        <ImageCaption />
-      </li>
-  );
-}
+      <div className="image-caption-div">
+        <div className="image-div">
+          <img src={this.props.model.get('image')}/>
+        </div>
+        <div className="caption-div">
+          <p>
+            {this.props.model.get('caption')}
+          </p>
+        </div>
+      </div>
+    );
+  }
 });
 
 var ImageListing = React.createClass({
+  mixins: [Backbone.React.Component.mixin],
   render: function(){
-    mixins: [Backbone.React.Component.mixin]
-    var imageList = this.getCollection().map(function(image){
-      return
-        <ImageItself model={image} />
+    var imageList = this.props.collection.map(function(model){
+      return (
+        <ImageItself model={model} key={model.id} />
+        );
     });
     return (
-      <ul>
-        {imageList}
-      </ul>
+      <div className="wrapper">
+        <div id="form">
+          <FormComponent collection={this.props.collection}/>
+        </div>
+        <div className="image-wrapper">
+          {imageList}
+        </div>
+      </div>
     )
   }
 });
 
-var ImageCaption = React.createClass({
-  render: function(){
-    mixins: [Backbone.React.Component.mixin]
-    return (<p>{this.getModel().get('caption')}</p>);
-  }
-});
-
-
-module.exports = ImageItself;
+module.exports = ImageListing;

@@ -5849,7 +5849,8 @@ body {
   padding-top: 75px;
   text-align: right;
   padding-bottom: 100px;
-  background-color: #fff; }
+  background-color: #fff;
+  margin-bottom: 15px; }
 
 #image-url {
   margin-left: 10%;
@@ -5863,7 +5864,6 @@ body {
   margin-left: 10%;
   margin-right: 10%;
   width: 80%;
-  margin-bottom: 10px;
   padding: 15px;
   height: 75px;
   display: inline-block; }
@@ -5875,7 +5875,8 @@ body {
   color: #fff;
   height: 50px;
   padding: 15px 20px;
-  margin-left: 5px; }
+  margin-left: 5px;
+  display: inline-block; }
 
 #add-image-button {
   margin-right: 10%;
@@ -5885,10 +5886,27 @@ body {
   color: #fff;
   height: 50px;
   padding: 15px 20px;
-  margin-left: 5px; }
+  margin-left: 5px;
+  display: inline-block; }
 
-li {
-  list-style: none;
-  text-align: center; }
+.image-caption-div {
+  text-align: center;
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%; }
+
+.caption-div {
+  background-color: #fff;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-bottom: 15px; }
+
+.caption-div p {
+  margin-bottom: 0; }
+
+.hidden {
+  display: none; }
 
 /*# sourceMappingURL=app.css.map */

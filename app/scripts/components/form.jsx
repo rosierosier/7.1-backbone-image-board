@@ -15,24 +15,22 @@ $.fn.serializeObject = function(){
 };
 
 var FormComponent = React.createClass({
-
-mixins: [Backbone.React.Component.mixin],
-// this.props.
-// this.state.
-
+  mixins: [Backbone.React.Component.mixin],
   handleSubmit: function(e){
     e.preventDefault();
-    console.log('working');
-    var formData = $(e.currentTarget).serializeObject();
-    console.log(this.props.collection);
+    var formData = $(e.target).serializeObject();
+      console.log('submit is working:', formData);
     this.getCollection().create(formData);
+    // $('#form').toggle('medium', function(){
+    //   $('#form').addClass('hidden');
+    // });
   },
 
   render: function(){
     return (
-      <form id="form-wrapper" onSubmit={this.handleSubmit}>
-        <input type="text" name="image" placeholder="Image URL" id="image-url" className="" /><br/>
-        <input type="text" name="caption" placeholder="Image Caption" id="caption" className="" /><br/>
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" name="image" placeholder="Image URL" id="image-url" className=""/><br/>
+        <input type="text" name="caption" placeholder="Image Caption" id="caption" className=""/><br/>
         <input type="reset" id="cancel-button" value="CANCEL"/>
         <input type="submit" id="add-image-button" value="ADD IMAGE"/>
       </form>

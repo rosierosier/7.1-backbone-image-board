@@ -4,12 +4,12 @@ var ReactDOM = require('react-dom');
 require('backbone-react-component');
 
 var SingleImage = Backbone.Model.extend({
-
+  idAttribute: '_id'
 });
 
 var ImageCollection = Backbone.Collection.extend({
-  model: Image,
-  url: 'http://tiny-lasagna-server.herokuapp.com/collections/rosie-image-project',
+  model: SingleImage,
+  url: 'http://tiny-lasagna-server.herokuapp.com/collections/rosieimageproject',
 });
 
 module.exports = {

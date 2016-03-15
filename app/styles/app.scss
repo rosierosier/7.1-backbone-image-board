@@ -57,6 +57,7 @@ body {
   text-align: right;
   padding-bottom: 100px;
   background-color: #fff;
+  margin-bottom: 15px;
 }
 
 #image-url {
@@ -75,7 +76,7 @@ body {
   margin-left: 10%;
   margin-right: 10%;
   width: 80%;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
   padding: 15px;
   height: 75px;
   display: inline-block;
@@ -90,6 +91,7 @@ body {
   height: 50px;
   padding: 15px 20px;
   margin-left: 5px;
+  display: inline-block;
 }
 
 #add-image-button {
@@ -101,9 +103,45 @@ body {
   height: 50px;
   padding: 15px 20px;
   margin-left: 5px;
+  display: inline-block;
 }
 
-li {
-  list-style: none;
+.image-caption-div {
   text-align: center;
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.image-div {
+
+}
+
+.caption-div {
+  background-color: #fff;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-bottom: 15px;
+}
+
+.caption-div p {
+  margin-bottom: 0;
+}
+
+// li img {
+//   margin-right: 10%;
+//   margin-left: 10%;
+//   margin-top: 10px;
+//
+// }
+
+// li img p {
+//   background-color: #fff;
+//   padding: 15px 20px;
+// }
+
+.hidden {
+  display: none;
 }

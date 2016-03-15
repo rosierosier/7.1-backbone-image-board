@@ -17,22 +17,20 @@ $.fn.serializeObject = function(){
 };
 
 var FormComponent = React.createClass({displayName: "FormComponent",
-
-mixins: [Backbone.React.Component.mixin],
-// this.props.
-// this.state.
-
+  mixins: [Backbone.React.Component.mixin],
   handleSubmit: function(e){
     e.preventDefault();
-    console.log('working');
-    var formData = $(e.currentTarget).serializeObject();
-    console.log(this.props.collection);
+    var formData = $(e.target).serializeObject();
+      console.log('submit is working:', formData);
     this.getCollection().create(formData);
+    // $('#form').toggle('medium', function(){
+    //   $('#form').addClass('hidden');
+    // });
   },
 
   render: function(){
     return (
-      React.createElement("form", {id: "form-wrapper", onSubmit: this.handleSubmit}, 
+      React.createElement("form", {onSubmit: this.handleSubmit}, 
         React.createElement("input", {type: "text", name: "image", placeholder: "Image URL", id: "image-url", className: ""}), React.createElement("br", null), 
         React.createElement("input", {type: "text", name: "caption", placeholder: "Image Caption", id: "caption", className: ""}), React.createElement("br", null), 
         React.createElement("input", {type: "reset", id: "cancel-button", value: "CANCEL"}), 
@@ -51,75 +49,79 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 require('backbone-react-component');
 
-var models = require('../models/image')
-
+var models = require('../models/image');
+var FormComponent = require('./form.jsx');
 
 console.log('Hello Listing');
 
-
 var ImageItself = React.createClass({displayName: "ImageItself",
+  mixins: [Backbone.React.Component.mixin],
   render: function(){
+    // console.log(this.props.model.get('image'));
+    // console.log(this.props.model.get('caption'));
     return (
-      React.createElement("li", null, 
-        React.createElement("img", null), 
-        React.createElement(ImageCaption, null)
+      React.createElement("div", {className: "image-caption-div"}, 
+        React.createElement("div", {className: "image-div"}, 
+          React.createElement("img", {src: this.props.model.get('image')})
+        ), 
+        React.createElement("div", {className: "caption-div"}, 
+          React.createElement("p", null, 
+            this.props.model.get('caption')
+          )
+        )
       )
-  );
-}
+    );
+  }
 });
 
 var ImageListing = React.createClass({displayName: "ImageListing",
+  mixins: [Backbone.React.Component.mixin],
   render: function(){
-    mixins: [Backbone.React.Component.mixin]
-    var imageList = this.getCollection().map(function(image){
-      return
-        React.createElement(ImageItself, {model: image})
+    var imageList = this.props.collection.map(function(model){
+      return (
+        React.createElement(ImageItself, {model: model, key: model.id})
+        );
     });
     return (
-      React.createElement("ul", null, 
-        imageList
+      React.createElement("div", {className: "wrapper"}, 
+        React.createElement("div", {id: "form"}, 
+          React.createElement(FormComponent, {collection: this.props.collection})
+        ), 
+        React.createElement("div", {className: "image-wrapper"}, 
+          imageList
+        )
       )
     )
   }
 });
 
-var ImageCaption = React.createClass({displayName: "ImageCaption",
-  render: function(){
-    mixins: [Backbone.React.Component.mixin]
-    return (React.createElement("p", null, this.getModel().get('caption')));
-  }
-});
+module.exports = ImageListing;
 
-
-module.exports = ImageItself;
-
-},{"../models/image":4,"backbone":6,"backbone-react-component":5,"react":165,"react-dom":36}],3:[function(require,module,exports){
+},{"../models/image":4,"./form.jsx":1,"backbone":6,"backbone-react-component":5,"react":165,"react-dom":36}],3:[function(require,module,exports){
 "use strict";
 console.log('Hello World!');
 var Backbone = require('backbone');
 var React = require('react');
 var ReactDOM = require('react-dom');
 require('backbone-react-component');
-var ImageItself = require('./components/listing.jsx');
 var FormComponent = require('./components/form.jsx');
+var ImageListing = require('./components/listing.jsx');
 var models = require('./models/image')
 
-var newImage = new models.SingleImage;
-var newImageCollection = new models.ImageCollection;
+var newImageCollection = new models.ImageCollection();
 
-newImage = {
-  caption: 'caption here'
-}
 
-ReactDOM.render(
-  React.createElement(FormComponent, {collection: newImageCollection}),
-  document.getElementById('form')
-  );
+// ReactDOM.render(
+//   <FormComponent collection={newImageCollection}/>,
+//   document.getElementById('app')
+// );
 
 ReactDOM.render(
-  React.createElement(ImageItself, {model: newImage}),
+  React.createElement(ImageListing, {collection: newImageCollection}),
   document.getElementById('app')
-  );
+);
+
+newImageCollection.fetch();
 
 },{"./components/form.jsx":1,"./components/listing.jsx":2,"./models/image":4,"backbone":6,"backbone-react-component":5,"react":165,"react-dom":36}],4:[function(require,module,exports){
 "use strict";
@@ -129,12 +131,12 @@ var ReactDOM = require('react-dom');
 require('backbone-react-component');
 
 var SingleImage = Backbone.Model.extend({
-
+  idAttribute: '_id'
 });
 
 var ImageCollection = Backbone.Collection.extend({
-  model: Image,
-  url: 'http://tiny-lasagna-server.herokuapp.com/collections/rosie-image-project',
+  model: SingleImage,
+  url: 'http://tiny-lasagna-server.herokuapp.com/collections/rosieimageproject',
 });
 
 module.exports = {
