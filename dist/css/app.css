@@ -5861,6 +5861,7 @@ body {
   display: inline-block; }
 
 #caption {
+  margin-bottom: 10px;
   margin-left: 10%;
   margin-right: 10%;
   width: 80%;
@@ -5906,7 +5907,7 @@ body {
 .caption-div p {
   margin-bottom: 0; }
 
-.hidden {
+.invisible {
   display: none; }
 
 /*# sourceMappingURL=app.css.map */

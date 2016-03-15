@@ -23,9 +23,6 @@ var FormComponent = React.createClass({displayName: "FormComponent",
     var formData = $(e.target).serializeObject();
       console.log('submit is working:', formData);
     this.getCollection().create(formData);
-    // $('#form').toggle('medium', function(){
-    //   $('#form').addClass('hidden');
-    // });
   },
 
   render: function(){
@@ -48,6 +45,7 @@ var Backbone = require('backbone');
 var React = require('react');
 var ReactDOM = require('react-dom');
 require('backbone-react-component');
+var $ = require('jquery');
 
 var models = require('../models/image');
 var FormComponent = require('./form.jsx');
@@ -57,8 +55,6 @@ console.log('Hello Listing');
 var ImageItself = React.createClass({displayName: "ImageItself",
   mixins: [Backbone.React.Component.mixin],
   render: function(){
-    // console.log(this.props.model.get('image'));
-    // console.log(this.props.model.get('caption'));
     return (
       React.createElement("div", {className: "image-caption-div"}, 
         React.createElement("div", {className: "image-div"}, 
@@ -76,15 +72,28 @@ var ImageItself = React.createClass({displayName: "ImageItself",
 
 var ImageListing = React.createClass({displayName: "ImageListing",
   mixins: [Backbone.React.Component.mixin],
+
+  displayForm: function(e){
+    console.log('displaying form');
+    e.preventDefault();
+    $('#form').toggle('medium', function(){
+      $('#form').removeClass('invisible');
+    });
+  },
+
   render: function(){
     var imageList = this.props.collection.map(function(model){
       return (
         React.createElement(ImageItself, {model: model, key: model.id})
         );
     });
+
     return (
       React.createElement("div", {className: "wrapper"}, 
-        React.createElement("div", {id: "form"}, 
+        React.createElement("div", {id: "header", onClick: this.displayForm}, 
+          React.createElement("button", null, React.createElement("p", null, "+"))
+        ), 
+        React.createElement("div", {id: "form", className: "invisible"}, 
           React.createElement(FormComponent, {collection: this.props.collection})
         ), 
         React.createElement("div", {className: "image-wrapper"}, 
@@ -97,7 +106,7 @@ var ImageListing = React.createClass({displayName: "ImageListing",
 
 module.exports = ImageListing;
 
-},{"../models/image":4,"./form.jsx":1,"backbone":6,"backbone-react-component":5,"react":165,"react-dom":36}],3:[function(require,module,exports){
+},{"../models/image":4,"./form.jsx":1,"backbone":6,"backbone-react-component":5,"jquery":34,"react":165,"react-dom":36}],3:[function(require,module,exports){
 "use strict";
 console.log('Hello World!');
 var Backbone = require('backbone');
@@ -110,11 +119,6 @@ var models = require('./models/image')
 
 var newImageCollection = new models.ImageCollection();
 
-
-// ReactDOM.render(
-//   <FormComponent collection={newImageCollection}/>,
-//   document.getElementById('app')
-// );
 
 ReactDOM.render(
   React.createElement(ImageListing, {collection: newImageCollection}),

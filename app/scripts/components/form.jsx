@@ -21,9 +21,6 @@ var FormComponent = React.createClass({
     var formData = $(e.target).serializeObject();
       console.log('submit is working:', formData);
     this.getCollection().create(formData);
-    // $('#form').toggle('medium', function(){
-    //   $('#form').addClass('hidden');
-    // });
   },
 
   render: function(){

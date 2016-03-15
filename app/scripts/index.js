@@ -10,11 +10,6 @@ var models = require('./models/image')
 var newImageCollection = new models.ImageCollection();
 
 
-// ReactDOM.render(
-//   <FormComponent collection={newImageCollection}/>,
-//   document.getElementById('app')
-// );
-
 ReactDOM.render(
   <ImageListing collection={newImageCollection}/>,
   document.getElementById('app')
