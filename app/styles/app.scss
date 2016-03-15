@@ -16,11 +16,15 @@ img {
   max-width: 100%;
 }
 
+body {
+  background-color: #e0e1e2;
+}
+
 #header {
   background-color: #476c99;
   width: 100%;
   height: 50px;
-  margin-bottom: 75px;
+  // margin-bottom: 75px;
 }
 
 #header button {
@@ -48,8 +52,17 @@ img {
   // border: none;
 }
 
+#form {
+  padding-top: 75px;
+  text-align: right;
+  padding-bottom: 100px;
+  background-color: #fff;
+}
+
 #image-url {
-  margin: 0 auto;
+  // margin: 0 auto;
+  margin-left: 10%;
+  margin-right: 10%;
   width: 80%;
   margin-bottom: 10px;
   padding: 15px;
@@ -58,11 +71,39 @@ img {
 }
 
 #caption {
-  margin: 0 auto;
+  // margin: 0 auto;
+  margin-left: 10%;
+  margin-right: 10%;
   width: 80%;
   margin-bottom: 10px;
   padding: 15px;
   height: 75px;
   display: inline-block;
 
+}
+
+#cancel-button {
+  border-radius: 4px;
+  background-color: #b6b6b6;
+  border: none;
+  color: #fff;
+  height: 50px;
+  padding: 15px 20px;
+  margin-left: 5px;
+}
+
+#add-image-button {
+  margin-right: 10%;
+  border-radius: 4px;
+  background-color: #17aa56;
+  border: none;
+  color: #fff;
+  height: 50px;
+  padding: 15px 20px;
+  margin-left: 5px;
+}
+
+li {
+  list-style: none;
+  text-align: center;
 }

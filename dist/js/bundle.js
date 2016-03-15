@@ -32,10 +32,11 @@ mixins: [Backbone.React.Component.mixin],
 
   render: function(){
     return (
-      React.createElement("form", {onSubmit: this.handleSubmit}, 
+      React.createElement("form", {id: "form-wrapper", onSubmit: this.handleSubmit}, 
         React.createElement("input", {type: "text", name: "image", placeholder: "Image URL", id: "image-url", className: ""}), React.createElement("br", null), 
         React.createElement("input", {type: "text", name: "caption", placeholder: "Image Caption", id: "caption", className: ""}), React.createElement("br", null), 
-        React.createElement("input", {type: "submit", value: "submit"})
+        React.createElement("input", {type: "reset", id: "cancel-button", value: "CANCEL"}), 
+        React.createElement("input", {type: "submit", id: "add-image-button", value: "ADD IMAGE"})
       )
     );
   }

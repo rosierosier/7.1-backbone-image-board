@@ -30,10 +30,11 @@ mixins: [Backbone.React.Component.mixin],
 
   render: function(){
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form id="form-wrapper" onSubmit={this.handleSubmit}>
         <input type="text" name="image" placeholder="Image URL" id="image-url" className="" /><br/>
         <input type="text" name="caption" placeholder="Image Caption" id="caption" className="" /><br/>
-        <input type="submit" value="submit"/>
+        <input type="reset" id="cancel-button" value="CANCEL"/>
+        <input type="submit" id="add-image-button" value="ADD IMAGE"/>
       </form>
     );
   }
