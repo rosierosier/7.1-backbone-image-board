@@ -33,8 +33,8 @@ mixins: [Backbone.React.Component.mixin],
   render: function(){
     return (
       React.createElement("form", {onSubmit: this.handleSubmit}, 
-        React.createElement("label", {htmlFor: "image"}, "Address"), " ", React.createElement("input", {name: "image", id: "image-url", className: ""}), React.createElement("br", null), 
-        React.createElement("label", {htmlFor: "caption"}, "Caption"), " ", React.createElement("input", {name: "caption", id: "caption", className: ""}), React.createElement("br", null), 
+        React.createElement("input", {type: "text", name: "image", placeholder: "Image URL", id: "image-url", className: ""}), React.createElement("br", null), 
+        React.createElement("input", {type: "text", name: "caption", placeholder: "Image Caption", id: "caption", className: ""}), React.createElement("br", null), 
         React.createElement("input", {type: "submit", value: "submit"})
       )
     );
